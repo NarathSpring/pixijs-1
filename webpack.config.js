@@ -2,15 +2,17 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin"); //自动添加html文件
 
 module.exports = {
-  entry: "./src/main.js",
+  entry: "./src/main.ts",
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js"
   },
-  devServer: { //本地服务
+  devServer: {
+    //本地服务
     port: 3031,
     hot: true,
-    open: true
+    open: true,
+    contentBase: path.resolve(__dirname, "public")
   },
   module: {
     rules: [
@@ -23,16 +25,26 @@ module.exports = {
             presets: ["@babel/preset-env"],
             plugins: [
               "@babel/plugin-proposal-class-properties", //支持class属性
-              "plugin-transform-runtime" //支持async await
+              "@babel/plugin-transform-runtime" //支持async await
             ]
           }
         }
+      },
+      {
+        test: /\.(png|jpg)$/,
+        use: {
+          loader: "file-loader"
+        }
+      },
+      {
+        test: /\.ts$/,
+        use: "ts-loader"
       }
     ]
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "index.html"
+      template: path.resolve(__dirname, "public", "index.html") //html模板
     })
   ]
 };
