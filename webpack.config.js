@@ -1,5 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin"); //自动添加html文件
+// const CopyWebpackPlugin = require("copy-webpack-plugin");
+// const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
   entry: "./src/main.ts",
@@ -7,6 +9,7 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js"
   },
+  devtool: "inline-source-map",
   devServer: {
     //本地服务
     port: 3031,
@@ -43,8 +46,12 @@ module.exports = {
     ]
   },
   plugins: [
+    // new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "public", "index.html") //html模板
-    })
+    }),
+    // new CopyWebpackPlugin({
+    //   patterns: [{ from: "public/assets", to: "dist/assets" }]
+    // })
   ]
 };

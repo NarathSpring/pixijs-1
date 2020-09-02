@@ -1,18 +1,30 @@
-// const PIXI = require("pixi.js/dist/pixi.js");
 import * as PIXI from "pixi.js";
 import path from "path";
 
-function init() {
+const far = require("../public/assets/bg-far.png");
+const mid = require("../public/assets/bg-mid.png");
 
-  const stage = new PIXI.Container();
-  const renderer = PIXI.autoDetectRenderer({
-    // @ts-ignore
-    view: document.getElementById("app")
+// const loader = new PIXI.Loader();
+// loader.add("far", far.default);
+
+function init() {
+  const app = new PIXI.Application({
+    width: 512,
+    height: 384,
+    view: <HTMLCanvasElement>document.getElementById("app")
   });
 
-  const farTexture = PIXI.Texture.from('../public/assets/bg-far.png')
+  const f = PIXI.Texture.from(far.default);
+  const fSprite = new PIXI.Sprite(f);
+  fSprite.position.x = 0;
+  fSprite.position.y = 0;
+  app.stage.addChild(fSprite);
 
-  renderer.render(stage);
+  const m = PIXI.Texture.from(mid.default);
+  const mSprite = new PIXI.Sprite(m);
+  mSprite.position.x = 0;
+  mSprite.position.y = 128;
+  app.stage.addChild(mSprite);
 }
 
 init();
