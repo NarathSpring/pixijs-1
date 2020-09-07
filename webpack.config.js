@@ -40,7 +40,7 @@ module.exports = {
         }
       },
       {
-        test: /\.ts$/,
+        test: /\.tsx?$/,
         use: "ts-loader"
       }
     ]
@@ -49,9 +49,12 @@ module.exports = {
     // new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "public", "index.html") //html模板
-    }),
+    })
     // new CopyWebpackPlugin({
     //   patterns: [{ from: "public/assets", to: "dist/assets" }]
     // })
-  ]
+  ],
+  resolve: {
+    extensions: [".tsx", ".ts", ".js"]
+  }
 };

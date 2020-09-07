@@ -1,8 +1,7 @@
-import PIXI from "pixi.js";
+import * as PIXI from "pixi.js";
 
-export default class CreateTilingSprite extends PIXI.Sprite {
-  private textureX: PIXI.Texture;
-  private sprite: PIXI.Sprite;
+export default class CreateTilingSprite extends PIXI.Sprite{
+  public texture: PIXI.Texture;
 
   constructor(
     public imgUrl: string,
@@ -10,7 +9,7 @@ export default class CreateTilingSprite extends PIXI.Sprite {
     public height: number
   ) {
     super()
-    this.textureX = PIXI.Texture.from(imgUrl);
-    this.sprite = new PIXI.TilingSprite(this.texture, width, height);
+    this.texture = PIXI.Texture.from(imgUrl);
+    new PIXI.TilingSprite(this.texture, width, height);
   }
 }
