@@ -1,5 +1,6 @@
 import * as PIXI from "pixi.js";
 import TilingSprite from "./lib/createTilingSprite";
+import MapGenerater from "./lib/MapGenerater"
 
 const far = require("../public/assets/bg-far.png");
 const mid = require("../public/assets/bg-mid.png");
@@ -11,37 +12,38 @@ function init() {
     view: <HTMLCanvasElement>document.getElementById("app")
   });
 
-  const fSprite = new TilingSprite(far.default, 512, 256);
+  // const fSprite = new TilingSprite(far.default, 512, 256);
   // const mSprite = new TilingSprite(mid.default, 512, 256);
-  const mSprite = new PIXI.TilingSprite(
-    PIXI.Texture.from(mid.default),
-    512,
-    256
-  );
+  // mSprite.y = 152
+ 
+  
+  
 
-  fSprite
-    .on("pointerdown", onDragStart)
-    .on("pointerup", onDragEnd)
-    .on("pointerupoutside", onDragEnd)
-    .on("pointermove", onDragMove);
+  // fSprite
+  //   .on("pointerdown", onDragStart)
+  //   .on("pointerup", onDragEnd)
+  //   .on("pointerupoutside", onDragEnd)
+  //   .on("pointermove", onDragMove);
 
-  mSprite
-    .on("pointerdown", onDragStart)
-    .on("pointerup", onDragEnd)
-    .on("pointerupoutside", onDragEnd)
-    .on("pointermove", onDragMove);
+  // mSprite
+  //   .on("pointerdown", onDragStart)
+  //   .on("pointerup", onDragEnd)
+  //   .on("pointerupoutside", onDragEnd)
+  //   .on("pointermove", onDragMove);
 
-  app.stage.addChild(fSprite);
-  app.stage.addChild(mSprite);
-  console.log(app);
-}
+  // app.stage.addChild(fSprite);
+  // app.stage.addChild(mSprite);
 
-function mapMove(f: PIXI.Sprite, m: PIXI.Sprite) {
-  f.position.x -= 0.128;
-  m.position.x -= 0.64;
+  const map = new MapGenerater()
+
+  app.stage.addChild(map)
+
+  
 }
 
 function onDragStart(this, event: PIXI.InteractionEvent) {
+  console.log(this);
+  
   this.data = event.data;
   const position = this.data.getLocalPosition(this);
   this.pivot.set(position.x, position.y);
