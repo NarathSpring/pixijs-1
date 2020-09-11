@@ -29,6 +29,6 @@ export default class MapGenerater extends PIXI.Container {
         this.addChild(this.wall);
       }
     }
-    this.position.set(80, 32);
+    // this.position.set(80, 32);
   }
 }

@@ -16,6 +16,6 @@ export default class BoxGenerater extends PIXI.Sprite {
       box.y = Math.floor(Math.random() * 18) * 16;
       this.addChild(box);
     }
-    this.position.set(96, 48);
+    // this.position.set(96, 48);
   }
 }
