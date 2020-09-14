@@ -33,4 +33,4 @@ import Game from './lib/Game'
 
 // init();
 const game= new Game()
-console.log(game);
+// console.log(game);
