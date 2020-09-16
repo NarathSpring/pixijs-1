@@ -1,10 +1,7 @@
 import * as PIXI from "pixi.js";
 import Scene1 from "./Scene1";
 
-import MapGenerater from "./MapGenerater";
-import BoxGenerater from "./BoxGenerater";
-
-export default class Game extends PIXI.DisplayObject {
+export default class Game extends PIXI.Application {
   constructor() {
     super();
     const app = new PIXI.Application({
@@ -13,6 +10,23 @@ export default class Game extends PIXI.DisplayObject {
       view: <HTMLCanvasElement>document.getElementById("app")
     });
 
+    this.gameStart(app);
+
+    const restart = new PIXI.Text("restart", {
+      fontSize: 36,
+      fill: "#ffffff"
+    });
+    restart.anchor.set(0.5, 0.5);
+    restart.position.set(app.view.width / 2, 700);
+    restart.interactive = true;
+    restart.on("tap", () => {
+      app.stage.removeChild();
+      this.gameStart(app);
+    });
+    app.stage.addChild(restart);
+  }
+
+  private gameStart(app: PIXI.Application) {
     const scene1 = new Scene1();
     scene1.position.set(
       (app.screen.width - scene1.width) / 2,
@@ -20,9 +34,4 @@ export default class Game extends PIXI.DisplayObject {
     );
     app.stage.addChild(scene1);
   }
-  keyboardEvent() {
-    // window.addEventListener('keydown', () => { },false)
-    // PIXI.utils.EventEmitter()
-  }
-
 }

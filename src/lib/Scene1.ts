@@ -24,7 +24,6 @@ export default class Scene1 extends PIXI.Container {
 
   private createBox() {
     const box = new BoxGenerater();
-
     this.addChild(box);
   }
 
@@ -32,6 +31,12 @@ export default class Scene1 extends PIXI.Container {
     const playerUrl = require("../../public/assets/explorer.png").default;
     this.player = new PIXI.Sprite(PIXI.Texture.from(playerUrl));
     this.player.position.set(16, 16);
+    // this.player.width = 21;
+    // this.player.height = 32;
+    this.player.hitArea = new PIXI.Rectangle(0, 0, 21, 32);
+    // console.log(this.player.getBounds());
+    console.log(this.player);
+
     this.addChild(this.player);
   }
 
@@ -73,16 +78,16 @@ export default class Scene1 extends PIXI.Container {
   private playerMove(e) {
     switch (e.target.id) {
       case 1:
-        this.y -= 20;
+        this.y - 20 < 16 ? (this.y = this.y) : (this.y -= 20);
         break;
       case 2:
-        this.y += 20;
+        this.y + 20 > 276 ? (this.y = this.y) : (this.y += 20);
         break;
       case 3:
-        this.x -= 20;
+        this.x - 20 < 16 ? (this.x = this.x) : (this.x -= 20);
         break;
       case 4:
-        this.x += 20;
+        this.x + 20 > 280 ? (this.x = this.x) : (this.x += 20);
         break;
     }
   }
