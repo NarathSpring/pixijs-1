@@ -3,7 +3,6 @@ import * as PIXI from "pixi.js";
 const boxBrick = require("../../public/assets/treasure.png").default;
 
 export default class BoxGenerater extends PIXI.Sprite {
-
   constructor(public num?: number) {
     super();
     this.setup();
@@ -15,6 +14,8 @@ export default class BoxGenerater extends PIXI.Sprite {
       const box = new PIXI.Sprite(PIXI.Texture.from(boxBrick));
       box.x = Math.floor(Math.random() * 18) * 16 + 16;
       box.y = Math.floor(Math.random() * 18) * 16 + 16;
+      box.width = 16;
+      box.height = 16;
       this.addChild(box);
     }
     // this.position.set(96, 48);

@@ -18,7 +18,6 @@ export default class Scene1 extends PIXI.Container {
     this.createBox();
     this.createPlayer();
     this.createBoard();
-    console.log(this.box.children[0].position);
   }
 
   private createMap() {
@@ -35,6 +34,10 @@ export default class Scene1 extends PIXI.Container {
     const playerUrl = require("../../public/assets/explorer.png").default;
     this.player = new PIXI.Sprite(PIXI.Texture.from(playerUrl));
     this.player.position.set(16, 16);
+    // this.player.anchor.set(0.5, 0.5);
+    this.player.width = 16;
+    this.player.height = 16;
+
     this.addChild(this.player);
   }
 
@@ -74,40 +77,42 @@ export default class Scene1 extends PIXI.Container {
   }
 
   private playerMove(e) {
-    const hitBox = this.checkHitBox();
-    // console.log(hitBox);
-
+    let hitBox: PIXI.Sprite;
     switch (e.target.id) {
       case 1:
-        this.player.y - 20 < 16
+        this.player.y - 16 < 16
           ? (this.player.y = this.player.y)
-          : (this.player.y -= 20);
+          : (this.player.y -= 16);
+        hitBox = this.checkHitBox();
         if (hitBox) {
-          hitBox.y - 20 < 16 ? (hitBox.y = hitBox.y) : (hitBox.y -= 20);
+          hitBox.y - 16 < 16 ? (hitBox.y = hitBox.y) : (hitBox.y -= 16);
         }
         break;
       case 2:
-        this.player.y + 20 > 276
+        this.player.y + 16 > 288
           ? (this.player.y = this.player.y)
-          : (this.player.y += 20);
+          : (this.player.y += 16);
+        hitBox = this.checkHitBox();
         if (hitBox) {
-          hitBox.y + 20 > 276 ? (hitBox.y = hitBox.y) : (hitBox.y += 20);
+          hitBox.y + 16 > 288 ? (hitBox.y = hitBox.y) : (hitBox.y += 16);
         }
         break;
       case 3:
-        this.player.x - 20 < 16
+        this.player.x - 16 < 16
           ? (this.player.x = this.player.x)
-          : (this.player.x -= 20);
+          : (this.player.x -= 16);
+        hitBox = this.checkHitBox();
         if (hitBox) {
-          hitBox.x - 20 < 16 ? (hitBox.x = hitBox.x) : (hitBox.x -= 20);
+          hitBox.x - 16 < 16 ? (hitBox.x = hitBox.x) : (hitBox.x -= 16);
         }
         break;
       case 4:
-        this.player.x + 20 > 280
+        this.player.x + 16 > 288
           ? (this.player.x = this.player.x)
-          : (this.player.x += 20);
+          : (this.player.x += 16);
+        hitBox = this.checkHitBox();
         if (hitBox) {
-          hitBox.x + 20 > 280 ? (hitBox.x = hitBox.x) : (hitBox.x += 20);
+          hitBox.x + 16 > 288 ? (hitBox.x = hitBox.x) : (hitBox.x += 16);
         }
         break;
     }
